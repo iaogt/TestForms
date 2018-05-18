@@ -1,0 +1,16 @@
+.btn-right{
+  float: right;
+  width: 50%;
+}
+
+.top-space-10{
+  margin-top: 10%;
+}
+
+.top-space-5{
+  margin-top: 5%;
+}
+
+.title{
+  font-size: 2rem;
+}
