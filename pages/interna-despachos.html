@@ -2,14 +2,19 @@
   <head>
     <meta charset="utf-8">
     <title>Despacho de Combustible</title>
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
     <link href="/css/SweetAlert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <div class="container" ng-app="myApp" ng-controller="internadespachoCtrl as $ctrl">
-
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">OECC</a>
+        <form class="form-inline">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Guardar</button>
+        </form>
+      </nav>
       <script type="text/ng-template" id="modalDespachos.html">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo Despacho</h5>
@@ -82,138 +87,181 @@
               </div>
             </div>
 
-            <!-- Medida Tanque 5k -->
+            <!-- Fecha -->
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-xs-6">
+              </div>
+              <div class="col-lg-6 col-md-6 col-xs-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Fecha</label>
+                  <input type="text" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-lg-12 col-md-12 col-xs-12">
                 <form>
+                  <div id="accordion">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link" aria-expanded="true" aria-controls="collapseOne" ng-click="mostrarTanques = !mostrarTanques">
+                            Medida de Tanques
+                          </button>
+                        </h5>
+                      </div>
 
-                  <!-- Medida Tanque 5k -->
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Medida Inicial de Tanque 5k</label>
-                        <input type="text" class="form-control" required>
+                      <div uib-collapse="mostrarTanques" id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                        <div class="card-body">
+
+                          <!-- Medida de Tanque 5k -->
+                          <div class="row">
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Medida Inicial de Tanque 5k</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Galones</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Medida Final de Tanque 5k</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Galones</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Medida Tanque 10k -->
+                          <div class="row">
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Medida Inicial de Tanque 10k</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Galones</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Medida Final de Tanque 10k</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Galones</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Galones</label>
-                        <input type="text" class="form-control" required>
+                    <div class="card">
+                      <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" ng-click="mostrarBombas = !mostrarBombas">
+                            Contador Bombas
+                          </button>
+                        </h5>
                       </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Medida Final de Tanque 5k</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Galones</label>
-                        <input type="text" class="form-control" required>
+                      <div uib-collapse="mostrarBombas" id="collapseTwo" class="show" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                          <!-- Contador Bomba 1 -->
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contador Inicial Bomba 1</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contador Final Bomba 1</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Total Despachado</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Contador Bomba 2 -->
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contador Inicial Bomba 2</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contador Final Bomba 2</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Total Despachado</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Contador Bomba 3 -->
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contador Inicial Bomba 3</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contador Final Bomba 3</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Total Despachado</label>
+                                <input type="text" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <!-- Medida Tanque 10k -->
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Medida Inicial de Tanque 10k</label>
-                        <input type="text" class="form-control" required>
-                      </div>
+                  <div class="row top-space-5">
+                    <div class="col-lg-6 col-md-6 col-xs-6">
+                      <button type="button" class="btn btn-primary btn-center" data-toggle="modal" data-target="#exampleModal">Guardar Información</button>
                     </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Galones</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Medida Final de Tanque 10k</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Galones</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Contador Bomba 1 -->
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contador Inicial Bomba 1</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contador Final Bomba 1</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Total Despachado</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Contador Bomba 2 -->
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contador Inicial Bomba 2</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contador Final Bomba 2</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Total Despachado</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Contador Bomba 3 -->
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contador Inicial Bomba 3</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Contador Final Bomba 3</label>
-                        <input type="text" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Total Despachado</label>
-                        <input type="text" class="form-control" required>
-                      </div>
+                    <div class="col-lg-6 col-md-6 col-xs-6">
+                      <button type="button" class="btn btn-primary btn-center" data-toggle="modal" data-target="#exampleModal" ng-click="$ctrl.openModal()">Nuevo Registro</button>
                     </div>
                   </div>
                 </form>
-              </div>
-            </div>
-            <div class="row top-space-5">
-              <div class="col-lg-12 col-md-12 col-xs-12">
-                <button type="button" class="btn btn-primary btn-right" data-toggle="modal" data-target="#exampleModal" ng-click="$ctrl.openModal()">Nuevo Registro</button>
               </div>
             </div>
 
@@ -222,18 +270,22 @@
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">Kilometraje Vehículo</th>
+                      <th scope="col">Placas/Vehículo</th>
+                      <th scope="col" class="d-none d-sm-none d-md-table-cell">Departamento</th>
+                      <th scope="col" class="d-none d-sm-none d-md-table-cell">Galones Despachado</th>
+                      <th scope="col" class="d-none d-sm-none d-md-table-cell">Piloto</th>
+                      <th scope="col" class="d-none d-sm-none d-md-table-cell">Firma</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="record in records">
                       <th scope="row">{{record.No}}</th>
                       <td>{{record.First}}</td>
-                      <td>{{record.Last}}</td>
-                      <td>{{record.Handle}}</td>
+                      <td class="d-none d-sm-none d-md-table-cell">{{record.Last}}</td>
+                      <td class="d-none d-sm-none d-md-table-cell">{{record.Handle}}</td>
+                      <td class="d-none d-sm-none d-md-table-cell">{{record.Handle}}</td>
+                      <td class="d-none d-sm-none d-md-table-cell">{{record.Handle}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -245,14 +297,25 @@
         </div>
       </div>
     </div>
+    <script>
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+    var config = {
+      apiKey: "AIzaSyBXh5rzrlo_fc2rpTTm8KS7zBY7tF8-qFY",
+      authDomain: "oeccforms.firebaseapp.com",
+      databaseURL: "https://oeccforms.firebaseio.com"
+    };
+    firebase.initializeApp(config);
+  </script>
 
-  <script src="/js/angular/angular.min.js"></script>
-  <script src="/js/angular/angular-touch.js"></script>
-  <script src="/js/bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
-  <script src="/js/angular/angular-ui-router.js"></script>
-  <script src="/js/internadespachoCtrl.js"></script>
+  <script src="../js/angular/angular.min.js"></script>
+  <script src="../js/angular/angular-touch.js"></script>
+  <script src="../js/bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+  <script src="../js/angular/angular-ui-router.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script src="../js/internadespachoCtrl.js"></script>
   </body>
 
-  <!-- <script src="js/jquery/jquery-ui.js"></script> -->
-  <!-- <script src="js/SweetAlert/sweetalert.min.js"></script> -->
+  <!-- <script src="js/jquery/jquery-ui.js"></script>
+  <script src="js/SweetAlert/sweetalert.min.js"></script> -->
 </html>

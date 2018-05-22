@@ -1,29 +1,39 @@
 var app = angular.module("myApp", ['ui.bootstrap']);
 app.controller("internadespachoCtrl", function($scope, $uibModal, $document) {
     var $ctrl = this;
+    $scope.mostrarTanques = false;
+    $scope.mostrarBombas = false;
 
     // Listado de Despachos
     $scope.records = [
        {
-            "No" : "1",
+            "No" : "94.56826/36.2589",
             "First" : "Mark",
             "Last" : "Otto",
             "Handle" : "@modo",
+            "Handle" : "@modo",
+            "Handle" : "@modo",
         },{
-            "No" : "2",
+            "No" : "94.56826/36.2589",
             "First" : "Jacob",
             "Last" : "Thornton",
             "Handle" : "@fat",
+            "Handle" : "@modo",
+            "Handle" : "@modo",
         },{
-            "No" : "3",
+            "No" : "94.56826/36.2589",
             "First" : "Larry",
             "Last" : "The Bird",
             "Handle" : "@twitter",
+            "Handle" : "@modo",
+            "Handle" : "@modo",
         },{
-            "No" : "4",
+            "No" : "94.56826/36.2589",
             "First" : "Kevin",
             "Last" : "Herrera",
             "Handle" : "@kev",
+            "Handle" : "@modo",
+            "Handle" : "@modo",
         }
     ]
 
@@ -46,6 +56,16 @@ app.controller("internadespachoCtrl", function($scope, $uibModal, $document) {
             console.log("Exito");
         }
     }
+    //
+    // $scope.mostrarCamposTanques = function (){
+    //
+    //   if ($scope.mostarTanques === true) {
+    //
+    //   }
+    //
+    // }
+
+
 });
 
 

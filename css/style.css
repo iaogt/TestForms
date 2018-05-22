@@ -1,6 +1,6 @@
-.btn-right{
-  float: right;
-  width: 50%;
+.btn-center{
+  /* float: ; */
+  width: 100%;
 }
 
 .top-space-10{
@@ -13,4 +13,8 @@
 
 .title{
   font-size: 2rem;
+}
+
+.collapse:not(.in) > .card-body > .row{
+    display: none;
 }
