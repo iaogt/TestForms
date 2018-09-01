@@ -1,0 +1,59 @@
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Desde</span>
+                        </div>
+                        <input type="date" ng-model="fechaDesde" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Hasta</span>
+                        </div>
+                        <input type="date" ng-model="fechaHasta" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" align="left">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Día
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Semana
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Mes
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6" align="right">
+                    <button class="btn btn-primary" ng-click="filtrar()">Cargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:40px">
+        <h3>Listado de datos</h3>
+        <table class="table">
+            <thead>
+                <tr><td>Fecha</td><td>Consumo</td></tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(periodo,valor) in arrData">
+                    <td>{{periodo}}</td><td>{{valor}}</td>
+                </tr>
+                <tr ng-show="nodata">
+                    <td align="center" colspan="2">No hay información</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

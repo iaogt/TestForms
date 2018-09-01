@@ -1,9 +1,12 @@
-var app = angular.module("myApp", ['ui.bootstrap','firebase']);
-app.controller("internadespachoCtrl", function($scope, $uibModal, $document, $firebaseObject) {
+angular.module("internadespacho", ['ui.bootstrap','firebase']).
+component("internadespacho",{
+  templateUrl: 'pages/internadespachos.html',
+  controller: function internadespachoController($scope, $uibModal, $document, $firebaseObject,$routeParams) {
     var $ctrl = this;
     $scope.mostrarTanques = false;
     $scope.mostrarBombas = false;
     $scope.fechaDespacho = undefined;
+    $scope.objetoRegistro = null;
 
     $scope.nuevoFormularioDespacho = {
       fecha: "",
@@ -23,41 +26,22 @@ app.controller("internadespachoCtrl", function($scope, $uibModal, $document, $fi
       TotalDespachadoB2: 0,
       contadorInicialB3: 0,
       contadorFinalB3: 0,
-      TotalDespachadoB3: 0
+      TotalDespachadoB3: 0,
+      despachos:{}
     };
 
-    // Listado de Despachos
-    $scope.records = [
-       {
-            "No" : "94.56826/36.2589",
-            "First" : "Mark",
-            "Last" : "Otto",
-            "Handle" : "@modo",
-            "Handle" : "@modo",
-            "Handle" : "@modo",
-        },{
-            "No" : "94.56826/36.2589",
-            "First" : "Jacob",
-            "Last" : "Thornton",
-            "Handle" : "@fat",
-            "Handle" : "@modo",
-            "Handle" : "@modo",
-        },{
-            "No" : "94.56826/36.2589",
-            "First" : "Larry",
-            "Last" : "The Bird",
-            "Handle" : "@twitter",
-            "Handle" : "@modo",
-            "Handle" : "@modo",
-        },{
-            "No" : "94.56826/36.2589",
-            "First" : "Kevin",
-            "Last" : "Herrera",
-            "Handle" : "@kev",
-            "Handle" : "@modo",
-            "Handle" : "@modo",
-        }
-    ]
+    var id = $routeParams.id;
+
+    if(id!=""){
+      var obj = firebase.database().ref('formulariosDespachos/'+id);
+      $scope.objetoRegistro = $firebaseObject(obj);
+      $scope.objetoRegistro.$loaded().then(function(){
+        $scope.fechaDespacho = new Date($scope.objetoRegistro.fecha);
+      });
+      $scope.objetoRegistro.$bindTo($scope,"nuevoFormularioDespacho");
+      
+    }
+
 
     $ctrl.openModal = function () {
       console.log("Abrir Modal");
@@ -71,6 +55,12 @@ app.controller("internadespachoCtrl", function($scope, $uibModal, $document, $fi
           controllerAs: '$ctrl',
           appendTo: parentElem
         });
+
+        modalInstance.result.then(function(data){
+          $scope.nuevoFormularioDespacho.despachos[data.placa]=data;
+        },function(){
+          console.log('dismiss modal');
+        });
       }
 
     $scope.agregarDeposito = function() {
@@ -81,111 +71,26 @@ app.controller("internadespachoCtrl", function($scope, $uibModal, $document, $fi
 
     $scope.guardarInfo = function(){
       $scope.nuevoFormularioDespacho.fecha = $scope.fechaDespacho.getFullYear() + "-" + ($scope.fechaDespacho.getMonth() + 1) + "-" + $scope.fechaDespacho.getDate();
-      console.log($scope.nuevoFormularioDespacho);
+      if($scope.objetoRegistro==null){
+        var ref = firebase.database().ref('formulariosDespachos').push();
+        ref.set($scope.nuevoFormularioDespacho).then(function(ref){
+          $scope.objetoRegistro =ref;
+          alert('Información guardada');
+        }).catch(function(){
+          alert('Error al guardar');
+        });
+      }else{
+        $scope.objetoRegistro.$save().then(function(){
+          alert('Información guardada');
+        }).catch(function(){
+          alert('Error al guardar');
+        });
+      }
+      
     }
 
-    // Firebase Code
-    // $scope.holamundo = document.getElementById('holamundo');
-    // $scope.dataref = firebase.database().ref().child('equipos');
-    // $scope.dataref.on('value', snap => {
-    //   $scope.equipos = snap.val();
-    //   $scope.placas=[];
-    //   angular.forEach($scope.equipos, function(value, key) {
-    //     console.log($scope.equipos[key]['Vehicle Documents License Plate']);
-    //     this.push($scope.equipos[key]['Vehicle Documents License Plate']);
-    //   }, $scope.placas);
-    //
-    //   console.log($scope.placas);
-    // });
 
-
+  }
 });
 
 
-// Segundo controller
-app.controller('modalDespachosCtrl', function ($scope, $uibModalInstance, $firebaseObject) {
-  var $ctrl = this;
-
-  // Modelo Nuevo Despacho
-  $scope.nuevoDespacho = {
-    kilometraje: undefined,
-    placa: "",
-    departamento:"",
-    galones: undefined,
-    piloto: "",
-    firma: "",
-
-  };
-
-  $ctrl.ok = function () {
-    $scope.submitForm = function(isValid) {
-
-    // check to make sure the form is completely valid
-    if (isValid) {
-      alert('our form is amazing');
-      console.log($scope.nuevoDespacho);
-    }
-
-  };
-  $scope.dataref2 = firebase.database().ref("/formulariosDespachos").child('2018-05-21').child('despachos').child('P-001AAB');
-  // const itemData = $scope.dataref2.child('2018-05-21').child('despachos');
-  // const itemData2 = itemData.child('despachos');
-  $scope.dataref2.on('value', snap => {
-    $scope.DataForm = snap.val();
-    console.log($scope.DataForm);
-  });
-
-  $scope.dataref2.set($scope.nuevoDespacho);
-  console.log($scope.nuevoDespacho);
-
-  };
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-
-  // Referencia a Equipos
-  $scope.dataref = firebase.database().ref().child('equipos');
-  $scope.dataref.on('value', snap => {
-    $scope.equipos = snap.val();
-    $scope.placas=[];
-    angular.forEach($scope.equipos, function(value, key) {
-      console.log($scope.equipos[key]['Vehicle Documents License Plate']);
-      this.push($scope.equipos[key]['Vehicle Documents License Plate']);
-    }, $scope.placas);
-
-    console.log($scope.placas);
-
-  });
-
-  // $scope.dataref2 = firebase.database().ref("/formulariosDespachos");
-  // $scope.dataref2.on('value', snap => {
-  //   $scope.DataForm = snap.val();
-  //   console.log($scope.DataForm);
-  // });
-
-  $scope.ngModelOptionsSelected = function(value) {
-     if (arguments.length) {
-       _selected = value;
-     } else {
-       return _selected;
-     }
-   };
-
-   $scope.modelOptions = {
-    debounce: {
-      default: 500,
-      blur: 250
-    },
-    getterSetter: true
-  };
-
-
-});
-
-
-// //Controlador de firebase
-// app.controller("internadespachoCtrl", function($scope, $firebaseObject) {
-//   // firebase.initializeApp(config);
-//
-// });

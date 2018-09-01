@@ -1,3 +1,11 @@
+.container {
+  margin-top:15px;
+}
+
+.row {
+  margin-top:10px;
+}
+
 .btn-center{
   /* float: ; */
   width: 100%;

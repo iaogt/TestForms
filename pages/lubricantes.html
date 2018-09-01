@@ -1,0 +1,45 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Ingreso de lubricantes</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label>Fecha</label>
+            <input type="date" id="fecha" ng-model="fechaDespacho"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Placa de vehículo:</label>
+            <input type="text" name="placa" ng-model="registro.placa" uib-typeahead="placa for placa in placas | filter:$viewValue | limitTo:8" class="form-control" placeholder="ej: TC-8598NR" required>
+        </div>
+        <div class="col-md-6">
+            <label>Horómetro/Kilómetros</label>
+            <input type="text" class="form-control" ng-model="registro.kilometros"/>
+        </div>
+        <div class="col-md-6">
+            <label>Lubricante</label>
+            <input type="text" name="lubricantes" ng-model="registro.lubricante" uib-typeahead="lubricante for lubricante in lubricantes | filter:$viewValue | limitTo:8" class="form-control" placeholder="ej: Aceite 15w-40" required>
+        </div>
+        <div class="col-md-6">
+                <label>Cantidad</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="registro.cantidad" aria-label="Amount (to the nearest dollar)">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">gls</a>
+                            <a class="dropdown-item" href="#">lbs</a>
+                            <a class="dropdown-item" href="#">lts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="row" align="right">
+        <button class="btn btn-primary" ng-click="crearLubricante();">Guardar</button>
+    </div>
+</div>
